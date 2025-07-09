@@ -1,8 +1,17 @@
 const Jimp = require('jimp');
-// Adicione um comentário na primeira linha
-// Função para detectar brilho da imagem
 
 module.exports = async (req, res) => {
+  // Adiciona headers CORS para qualquer requisição
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+
+  // Trata requisição preflight (OPTIONS)
+  if (req.method === 'OPTIONS') {
+    return res.status(204).end();
+  }
+
+  // Garante que o método seja POST
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Use POST method' });
   }
@@ -31,6 +40,9 @@ module.exports = async (req, res) => {
 
     return res.status(200).json({ brilho });
   } catch (e) {
-    return res.status(500).json({ error: 'Falha ao analisar imagem', detalhe: e.message });
+    return res.status(500).json({
+      error: 'Falha ao analisar imagem',
+      detalhe: e.message,
+    });
   }
 };
