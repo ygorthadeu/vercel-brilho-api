@@ -2,7 +2,7 @@
   "name": "brilho-api",
   "version": "1.0.0",
   "dependencies": {
-    "get-image-colors": "^3.5.3",
+    "get-image-colors": "^3.1.0",
     "jimp": "^0.22.10"
   }
 }
